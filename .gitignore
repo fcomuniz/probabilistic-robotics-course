@@ -6,6 +6,7 @@
 *.stTheme.cache
 
 # workspace files are user-specific
+cmake-build-debug/
 *.sublime-workspace
 
 # project files should be checked into the repository, unless a significant
