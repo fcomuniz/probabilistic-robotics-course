@@ -3,3 +3,7 @@
 //
 
 #include "GridWorld.h"
+
+namespace world{
+
+}

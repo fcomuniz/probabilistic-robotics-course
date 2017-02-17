@@ -5,15 +5,23 @@
 #ifndef PROJECT_WORLD_H
 #define PROJECT_WORLD_H
 
+namespace world{
+
 template<typename T>
 class World {
+public:
     World(){
 
     }
 
 
 
+private:
+
+
 };
+
+}
 
 
 #endif //PROJECT_WORLD_H

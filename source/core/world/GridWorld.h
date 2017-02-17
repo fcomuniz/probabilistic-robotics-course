@@ -7,11 +7,13 @@
 
 
 #include "world/World.h"
+namespace world{
 
 template <unsigned int lines, unsigned int cols>
 class GridWorld : World<int>{
 
 };
+}
 
 
 #endif //PROJECT_GRIDWORLD_H
