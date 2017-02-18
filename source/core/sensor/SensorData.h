@@ -5,7 +5,7 @@
 #ifndef ROBOTICS_PROBABILISTICS_COURSE_SENSORDATA_H
 #define ROBOTICS_PROBABILISTICS_COURSE_SENSORDATA_H
 
-namespace representations{
+namespace sensor{
 
 template <typename T>
 class SensorData {
@@ -16,6 +16,12 @@ template<>
 class SensorData<int>{
 
 };
+
+template<>
+class SensorData<double>{
+};
+
+
 }
 
 

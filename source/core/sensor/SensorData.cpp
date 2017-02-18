@@ -4,6 +4,6 @@
 
 #include "SensorData.h"
 
-namespace representations{
+namespace sensor{
 
 }

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(robotics_probabilistics_course)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Ofast -fext-numeric-literals")
+
 
 find_package(PkgConfig)
 find_package(Eigen3 REQUIRED)
