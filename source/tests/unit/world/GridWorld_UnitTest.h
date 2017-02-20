@@ -5,7 +5,8 @@
 #ifndef ROBOTICS_PROBABILISTICS_COURSE_GRIDWORLD_UNITTEST_H
 #define ROBOTICS_PROBABILISTICS_COURSE_GRIDWORLD_UNITTEST_H
 
-template <size_t
+#include "world/GridWorld.h"
+
 class GridWorld_UnitTest {
 
 };

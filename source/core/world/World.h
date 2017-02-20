@@ -8,15 +8,19 @@
 #include <vector>
 #include "sensor/SensorData.h"
 #include "sensor/Sensor.h"
+#include "representations/Position.h"
+
 
 namespace world{
 
 template<typename T>
 class World {
 public:
-    World(){
+    World(std::vector<sensor::Sensor<T>> sensors): sensors(sensors){
 
     }
+
+
 
     /**
      *
@@ -27,16 +31,25 @@ public:
     template<class RobotCommand>
     std::vector<sensor::Sensor<T>> updateWorld(RobotCommand commandToRobot) {
 
-
+        updateRobotPosition(commandToRobot);
+        for(auto & sensor : sensors){
+           sensor.updateSensedPosition(robotPosition);
+        }
+        return sensors;
     }
 
 
 
+protected:
+
+    template<class RobotCommand>
+    void updateRobotPosition(RobotCommand commandToRobot){
+
+    }
 
 private:
-
-
-
+    std::vector<sensor::Sensor<T>> sensors;
+    representations::Position<T> robotPosition;
 };
 
 }

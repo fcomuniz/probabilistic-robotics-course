@@ -6,16 +6,25 @@
 #define ROBOTICS_PROBABILISTICS_COURSE_SENSOR_H
 
 #include "eigen3/Eigen/StdVector"
-#include "SensorPosition.h"
+#include "representations/Position.h"
 namespace sensor{
+using representations::Position;
 
 template<typename T>
 class Sensor {
 public:
-    Sensor(SensorPosition<T> position): position(position) {
+    Sensor(Position<T> position): position(position) {
 
     }
-    SensorPosition<T> position;
+
+    void updateSensedPosition(Position<T> & position){
+
+    }
+
+
+
+    Position<T> position;
+
 
 };
 

@@ -47,13 +47,13 @@ foreach(file_path ${SRCS})
     get_filename_component(dir_path ${file_path} PATH)
     get_filename_component(file_name_we ${file_path} NAME_WE)
     add_executable(${file_name_we} ${file_path} ${UNIT_DIR}/AllTests.cpp)
-    target_link_libraries(${file_name_we} libgtest libgmock messages source_lib ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY})
+    target_link_libraries(${file_name_we} libgtest libgmock source_lib )
     add_test(NAME ${file_name_we}
             COMMAND ${file_name_we})
 endforeach()
 
 add_executable(AllTests ${SRCS} ${UNIT_DIR}/AllTests.cpp)
-target_link_libraries(AllTests libgtest libgmock messages source_lib ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY})
+target_link_libraries(AllTests libgtest libgmock source_lib )
 add_test(NAME AllTests
         COMMAND AllTests)
 
