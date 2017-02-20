@@ -11,6 +11,7 @@ using representations::Position;
 namespace robot{
 template<typename T>
 class OmnidirectionalRobot : public Robot<Position<T>>{
+    using Robot<Position<T>>::Robot;
 
 };
 

@@ -5,29 +5,12 @@
 #ifndef ROBOTICS_PROBABILISTICS_COURSE_ROBOTPOSITION_H
 #define ROBOTICS_PROBABILISTICS_COURSE_ROBOTPOSITION_H
 
-#include "eigen3/Eigen/Eigen"
+#include "math/Vector2.h"
 
 namespace representations {
 
 template<typename T>
-class Position {
-
-};
-
-template<>
-class Position<int> : public Eigen::Vector2i {
-};
-
-
-template<>
-class Position<float> : public Eigen::Vector2f {
-
-};
-
-template<>
-class Position<double> : public Eigen::Vector2d {
-
-};
+using Position = itandroids_lib::math::Vector2<T>;
 
 }
 
