@@ -7,18 +7,19 @@
 
 namespace sensor{
 
+
 template <typename T>
-class SensorData {
+struct SensorData {
 
 };
 
 template<>
-class SensorData<int>{
+struct SensorData<int>{
 
 };
 
 template<>
-class SensorData<double>{
+struct SensorData<double>{
 };
 
 

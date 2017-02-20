@@ -3,3 +3,7 @@
 //
 
 #include "Robot.h"
+
+namespace robot{
+
+}

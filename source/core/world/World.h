@@ -8,6 +8,7 @@
 #include <vector>
 #include "sensor/SensorData.h"
 #include "sensor/Sensor.h"
+#include "robot/Robot.h"
 #include "representations/Position.h"
 
 
@@ -33,7 +34,7 @@ public:
 
         updateRobotPosition(commandToRobot);
         for(auto & sensor : sensors){
-           sensor.updateSensedPosition(robotPosition);
+//           sensor.updateSensedPosition(robotPosition);
         }
         return sensors;
     }
@@ -49,7 +50,6 @@ protected:
 
 private:
     std::vector<sensor::Sensor<T>> sensors;
-    representations::Position<T> robotPosition;
 };
 
 }

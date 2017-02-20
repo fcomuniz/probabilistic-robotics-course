@@ -5,8 +5,11 @@
 #ifndef ROBOTICS_PROBABILISTICS_COURSE_SENSOR_H
 #define ROBOTICS_PROBABILISTICS_COURSE_SENSOR_H
 
+#include <robot/OmnidirectionalRobot.h>
 #include "eigen3/Eigen/StdVector"
 #include "representations/Position.h"
+#include "sensor/SensorData.h"
+#include "robot/Robot.h"
 namespace sensor{
 using representations::Position;
 
@@ -17,13 +20,15 @@ public:
 
     }
 
-    void updateSensedPosition(Position<T> & position){
+    template<typename V>
+    void updateSensorData(const robot::Robot<V> & robot){
 
     }
 
 
 
     Position<T> position;
+
 
 
 };

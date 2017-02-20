@@ -9,9 +9,11 @@
 #include "world/World.h"
 namespace world{
 
-class GridWorld : World<int>{
+class GridWorld :public World<int>{
 public:
     GridWorld(int rows, int cols, std::vector<sensor::Sensor<int>> sensors);
+
+
 
 private:
     const int rows;
