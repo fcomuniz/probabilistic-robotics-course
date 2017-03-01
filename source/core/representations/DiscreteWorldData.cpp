@@ -3,3 +3,7 @@
 //
 
 #include "DiscreteWorldData.h"
+
+DiscreteWorldData::DiscreteWorldData(representations::Position<int> robotRealPosition, representations::Position<int> robotEstimate, Eigen::MatrixXd fmp):robotRealPosition(robotRealPosition), robotEstimate(robotEstimate), fmp(fmp) {
+
+}

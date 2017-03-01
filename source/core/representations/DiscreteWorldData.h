@@ -5,9 +5,15 @@
 #ifndef ROBOTICS_PROBABILISTICS_COURSE_DISCRETEWORLDDATA_H
 #define ROBOTICS_PROBABILISTICS_COURSE_DISCRETEWORLDDATA_H
 
+#include "representations/Position.h"
+#include "eigen3/Eigen/Eigen"
 
-class DiscreteWorldData {
+struct DiscreteWorldData {
+    DiscreteWorldData(representations::Position<int> robotRealPosition, representations::Position<int> robotEstimate, Eigen::MatrixXd fmp);
 
+    representations::Position <int> robotRealPosition;
+    representations::Position<int> robotEstimate;
+    Eigen::MatrixXd fmp;
 };
 
 

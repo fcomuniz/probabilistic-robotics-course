@@ -2,12 +2,31 @@
 #define DISCRETEWORLDGUI_H
 
 #include <QWidget>
+#include <eigen3/Eigen/Eigen>
+#include "representations/Position.h"
 
+// Forward Declarations
 class DiscreteWorldData;
 
 namespace Ui {
 class DiscreteWorldGUI;
 }
+
+class QCustomPlot;
+
+class QColor;
+
+// Class Definitions
+
+struct RobotPositionPlotData {
+
+  RobotPositionPlotData(const representations::Position<int> & robotPosition, const QColor & color, const QString & plotName);
+
+    const representations::Position<int> & robotPosition;
+    const QColor & color;
+    const QString & plotName;
+};
+
 
 class DiscreteWorldGUI : public QWidget
 {
@@ -16,7 +35,9 @@ class DiscreteWorldGUI : public QWidget
 public:
     explicit DiscreteWorldGUI(QWidget *parent = 0);
     ~DiscreteWorldGUI();
-    
+
+    virtual void setWorldData(std::vector<DiscreteWorldData> worldData);
+
 private slots:
 
     void on_nextButton_clicked();
@@ -24,6 +45,15 @@ private slots:
     void on_previousButton_clicked();
 
 private:
+    virtual void replot();
+    virtual void plotCurrentData(QCustomPlot * customPlot);
+    virtual void plotFMP(QCustomPlot * customPlot);
+    virtual void plotRobotRealPosition(QCustomPlot * customPlot);
+    virtual void plotRobotEstimatePosition(QCustomPlot * customPlot);
+    virtual void plotRobotPosition(QCustomPlot * customPlot, const RobotPositionPlotData & plotData
+    );
+    virtual void clearPlot(QCustomPlot * customPlot);
+    virtual void rescaleAxis(QCustomPlot * customPlot);
     int index;
     std::vector<DiscreteWorldData> data;
     Ui::DiscreteWorldGUI *ui;
