@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Ofast -fext-numeric-literals
 
 
 find_package(PkgConfig)
-find_package(Eigen3 REQUIRED)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 pkg_check_modules(Eigen3 REQUIRED eigen3)
 
 
