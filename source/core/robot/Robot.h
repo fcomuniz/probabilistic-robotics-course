@@ -11,7 +11,7 @@ namespace robot{
 template<class RobotPosition>
 class Robot {
 public:
-    Robot(RobotPosition position): position(position){
+    Robot(RobotPosition position = RobotPosition()): position(position){
 
     }
     RobotPosition position;

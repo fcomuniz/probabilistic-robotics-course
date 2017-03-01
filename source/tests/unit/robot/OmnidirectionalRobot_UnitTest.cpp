@@ -12,6 +12,6 @@ TYPED_TEST_CASE(OmnidirectionalRobot_UnitTest, MyTypes);
 TYPED_TEST(OmnidirectionalRobot_UnitTest, initialization_test){
 
     OmnidirectionalRobot<TypeParam > robot;
-    ASSERT_DOUBLE_EQ(robot.position.x(), 0);
-    ASSERT_DOUBLE_EQ(robot.position.y(), 0);
+    ASSERT_DOUBLE_EQ(robot.position.x, 0);
+    ASSERT_DOUBLE_EQ(robot.position.y, 0);
 }

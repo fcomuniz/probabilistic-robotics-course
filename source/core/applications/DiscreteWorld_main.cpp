@@ -2,7 +2,6 @@
 #include <QApplication>
 #include "gui/DiscreteWorldGUI.h"
 
-using DiscreteWorldData = int;
 
 int main(int argc, char * argv[]){
 

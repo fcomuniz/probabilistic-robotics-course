@@ -15,6 +15,8 @@ file(GLOB_RECURSE EXECUTABLES ${CMAKE_CURRENT_SOURCE_DIR}/applications/*main.cpp
 
 file(GLOB_RECURSE SRCS *.cpp)
 
+file(GLOB_RECURSE UIS *.ui)
+
 list(REMOVE_ITEM SRCS ${EXECUTABLES})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
