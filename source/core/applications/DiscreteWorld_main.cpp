@@ -1,6 +1,7 @@
 
 #include <QApplication>
 #include "gui/DiscreteWorldGUI.h"
+#include "DiscreteWorld_main.h"
 
 
 int main(int argc, char * argv[]){
