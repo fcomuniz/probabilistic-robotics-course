@@ -15,16 +15,17 @@ class DiscreteWorldGUI;
 class QCustomPlot;
 
 class QColor;
-
+class QCPColorMap;
 // Class Definitions
 
 struct RobotPositionPlotData {
 
-  RobotPositionPlotData(const representations::Position<int> & robotPosition, const QColor & color, const QString & plotName);
+  RobotPositionPlotData(const representations::Position<int> & robotPosition, const QColor & color, const QString & plotName, const QCPColorMap * colorMap);
 
     const representations::Position<int> & robotPosition;
     const QColor & color;
     const QString & plotName;
+    const QCPColorMap * colorMap;
 };
 
 
@@ -47,9 +48,7 @@ private slots:
 private:
     virtual void replot();
     virtual void plotCurrentData(QCustomPlot * customPlot);
-    virtual void plotFMP(QCustomPlot * customPlot);
-    virtual void plotRobotRealPosition(QCustomPlot * customPlot);
-    virtual void plotRobotEstimatePosition(QCustomPlot * customPlot);
+    virtual void plotWorldData(QCustomPlot *customPlot);
     virtual void plotRobotPosition(QCustomPlot * customPlot, const RobotPositionPlotData & plotData
     );
     virtual void clearPlot(QCustomPlot * customPlot);

@@ -8,6 +8,7 @@
 #include <random>
 #include <QApplication>
 
+const static int N_OF_ITERATIONS = 100;
 
 Eigen::MatrixXd generateRandomProbabilityMatrix(int nrows, int ncols){
     Eigen::MatrixXd returnMatrix = Eigen::MatrixXd::Zero(nrows, ncols);
@@ -26,8 +27,8 @@ Eigen::MatrixXd generateRandomProbabilityMatrix(int nrows, int ncols){
 representations::Position<int> generateRandomRobotPosition(int nRows, int nCols){
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> disRows(0,nRows);
-    std::uniform_int_distribution<> disCols(0,nCols);
+    std::uniform_int_distribution<> disRows(0,nRows-1);
+    std::uniform_int_distribution<> disCols(0,nCols-1);
     representations::Position<int> pos;
     pos.x = disCols(gen);
     pos.y = disRows(gen);
@@ -37,9 +38,9 @@ representations::Position<int> generateRandomRobotPosition(int nRows, int nCols)
 
 std::vector<DiscreteWorldData> generateDiscreteWorldData(){
     std::vector<DiscreteWorldData> worldData;
-    int nCols = 10;
-    int nRows = 20;
-    for (int i = 0 ; i < 20; i++){
+    int nCols = 100;
+    int nRows = 200;
+    for (int i = 0 ; i < N_OF_ITERATIONS; i++){
         Eigen::MatrixXd fdp = generateRandomProbabilityMatrix(nRows,nCols);
         worldData.push_back(DiscreteWorldData(generateRandomRobotPosition(nRows,nCols), generateRandomRobotPosition(nRows,nCols), fdp));
     }
