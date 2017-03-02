@@ -50,6 +50,16 @@ foreach(file_path ${SRCS})
     target_link_libraries(${file_name_we} libgtest libgmock source_lib )
     add_test(NAME ${file_name_we}
             COMMAND ${file_name_we})
+
+    #Finding test configuration files
+    file(GLOB_RECURSE UNIT_CONFS ${dir_path}/*.txt ${dir_path}/*.json)
+    foreach(unit_conf ${UNIT_CONFS})
+        add_custom_command(TARGET ${file_name_we}
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                ${unit_conf} $<TARGET_FILE_DIR:${file_name_we}>)
+    endforeach()
+
 endforeach()
 
 add_executable(AllTests ${SRCS} ${UNIT_DIR}/AllTests.cpp)

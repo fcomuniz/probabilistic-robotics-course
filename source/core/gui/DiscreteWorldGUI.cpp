@@ -110,11 +110,6 @@ void DiscreteWorldGUI::plotRobotPosition(QCustomPlot *customPlot, const RobotPos
 }
 
 void DiscreteWorldGUI::clearPlot(QCustomPlot *customPlot) {
-
-    customPlot->clearFocus();
-    customPlot->clearGraphs();
-    customPlot->clearItems();
     customPlot->clearPlottables();
-    customPlot->clearMask();
 }
 

@@ -9,5 +9,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 pkg_check_modules(Eigen3 REQUIRED eigen3)
 
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/binaries)
 
 add_subdirectory(source)
