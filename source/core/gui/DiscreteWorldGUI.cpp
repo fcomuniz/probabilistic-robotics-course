@@ -76,10 +76,12 @@ void DiscreteWorldGUI::plotWorldData(QCustomPlot *customPlot) {
 
     QCPColorScale * colorScale = new QCPColorScale(customPlot);
     if(!customPlot->plotLayout()->hasElement(0,1))
+    {
         customPlot->plotLayout()->addElement(0,1,colorScale);
-    colorScale->setType(QCPAxis::atRight);
-    colorMap->setColorScale(colorScale);
-    colorScale->axis()->setLabel("Probability");
+        colorScale->setType(QCPAxis::atRight);
+        colorMap->setColorScale(colorScale);
+        colorScale->axis()->setLabel("Probability");
+    }
     colorMap->setGradient(QCPColorGradient::gpPolar);
     colorMap->setInterpolate(false);
     colorMap->rescaleDataRange(true);

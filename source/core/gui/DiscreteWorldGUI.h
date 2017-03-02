@@ -29,7 +29,6 @@ struct RobotPositionPlotData {
 };
 
 
-// TODO fix bugs on appearing Probability more than once
 class DiscreteWorldGUI : public QWidget
 {
     Q_OBJECT
