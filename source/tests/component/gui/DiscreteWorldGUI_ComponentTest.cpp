@@ -24,6 +24,37 @@ Eigen::MatrixXd generateRandomProbabilityMatrix(int nrows, int ncols){
     return returnMatrix;
 }
 
+double sumOfDistances(representations::Position<int> estimatePosition, int nRows, int nCols){
+    double sum = 0;
+    for(int i = 0 ; i < nRows; i++){
+        for(int j = 0 ; j < nCols; j++){
+            sum += (estimatePosition -representations::Position<int>(j,i)).abs();
+        }
+    }
+    return sum;
+}
+
+Eigen::MatrixXd generatePrettyProbabilityMatrix(representations::Position<int> estimatePosition, int nrows, int ncols){
+    Eigen::MatrixXd returnMatrix = Eigen::MatrixXd::Zero(nrows, ncols);
+//    Put values in matrix
+    bool areValuesOk = true;
+    auto sum = sumOfDistances(estimatePosition, nrows, ncols);
+    for(int i = 0 ; i < nrows; i++){
+        for(int j = 0; j < ncols; j++){
+            double value = (estimatePosition -representations::Position<int>(j,i)).abs()/sum;
+            value = std::fabs(1-value );
+            areValuesOk = areValuesOk && (value <= 1);
+            returnMatrix(i,j) = value;
+        }
+    }
+    if(areValuesOk){
+        std::cout << "Values are ok" << std::endl;
+    } else {
+        std::cout << "Values aren't ok" << std::endl;
+    }
+    return returnMatrix;
+}
+
 representations::Position<int> generateRandomRobotPosition(int nRows, int nCols){
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -41,8 +72,9 @@ std::vector<DiscreteWorldData> generateDiscreteWorldData(){
     int nCols = 100;
     int nRows = 200;
     for (int i = 0 ; i < N_OF_ITERATIONS; i++){
-        Eigen::MatrixXd fdp = generateRandomProbabilityMatrix(nRows,nCols);
-        worldData.push_back(DiscreteWorldData(generateRandomRobotPosition(nRows,nCols), generateRandomRobotPosition(nRows,nCols), fdp));
+        auto estimateRobotPosition = generateRandomRobotPosition(nRows, nCols);
+        Eigen::MatrixXd fdp = generatePrettyProbabilityMatrix(estimateRobotPosition,nRows,nCols);
+        worldData.push_back(DiscreteWorldData(generateRandomRobotPosition(nRows,nCols), estimateRobotPosition, fdp));
     }
     return worldData;
 }
