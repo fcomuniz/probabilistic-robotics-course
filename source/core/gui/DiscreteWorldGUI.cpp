@@ -3,7 +3,7 @@
 #include "representations/DiscreteWorldData.h"
 #include <QColor>
 
-RobotPositionPlotData::RobotPositionPlotData(const representations::Position<int> &robotPosition, const QColor &color, const QString & plotName, const QCPColorMap * colorMap): robotPosition(robotPosition), color(color), plotName(plotName), colorMap(colorMap) {
+RobotPositionPlotData::RobotPositionPlotData(const representations::Position<int> &robotPosition, const QColor &color,  QString plotName, const QCPColorMap * colorMap): robotPosition(robotPosition), color(color), plotName(plotName), colorMap(colorMap) {
 
 }
 
@@ -14,7 +14,7 @@ DiscreteWorldGUI::DiscreteWorldGUI(QWidget *parent) :
     index = 0;
     ui->setupUi(this);
     ui->customPlot->axisRect()->setupFullAxesBox();
-
+    ui->customPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom);
 }
 
 DiscreteWorldGUI::~DiscreteWorldGUI()
@@ -55,12 +55,12 @@ void DiscreteWorldGUI::replot() {
 void DiscreteWorldGUI::plotCurrentData(QCustomPlot * customPlot) {
 //    Plotting the data from current index
     plotWorldData(customPlot);
-//    plotRobotRealPosition(customPlot);
-//    plotRobotEstimatePosition(customPlot);
     rescaleAxis(customPlot);
 }
 
 void DiscreteWorldGUI::plotWorldData(QCustomPlot *customPlot) {
+    customPlot->legend->setVisible(true);
+    customPlot->legend->setFont(QFont("Helvetica", 9));
     auto & fmp = data.at(index).fmp;
 
     QCPColorMap * colorMap = new QCPColorMap(customPlot->xAxis, customPlot->yAxis);
@@ -100,6 +100,7 @@ void DiscreteWorldGUI::rescaleAxis(QCustomPlot *customPlot) {
 
 void DiscreteWorldGUI::plotRobotPosition(QCustomPlot *customPlot, const RobotPositionPlotData & robotPositionPlotData) {
     customPlot->addGraph();
+    customPlot->graph()->setName(robotPositionPlotData.plotName);
     customPlot->graph()->setLineStyle(QCPGraph::lsNone);
     customPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 20));
     customPlot->graph()->setPen(QPen(robotPositionPlotData.color));

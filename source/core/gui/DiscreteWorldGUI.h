@@ -20,15 +20,16 @@ class QCPColorMap;
 
 struct RobotPositionPlotData {
 
-  RobotPositionPlotData(const representations::Position<int> & robotPosition, const QColor & color, const QString & plotName, const QCPColorMap * colorMap);
+  RobotPositionPlotData(const representations::Position<int> & robotPosition, const QColor & color, QString plotName, const QCPColorMap * colorMap);
 
     const representations::Position<int> & robotPosition;
     const QColor & color;
-    const QString & plotName;
+    QString plotName;
     const QCPColorMap * colorMap;
 };
 
 
+// TODO fix bugs on appearing Probability more than once
 class DiscreteWorldGUI : public QWidget
 {
     Q_OBJECT
