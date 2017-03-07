@@ -7,7 +7,8 @@
 namespace sensor{
 
 void DiscreteSensor::updateSensedPosition(const robot::OmnidirectionalRobot<int> & robot) {
-    sensedPosition = robot.position - position;
+    sensedPosition.x = robot.position.x - position.x;
+    sensedPosition.y = robot.position.y - position.y;
     addNoiseToSensedPosition();
 }
 
