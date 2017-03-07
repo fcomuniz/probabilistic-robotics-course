@@ -6,13 +6,18 @@
 
 namespace sensor{
 
-void DiscreteSensor::updateSensedPosition(const robot::OmnidirectionalRobot<int> & robot) {
+void DiscreteSensor::updateSensedPosition(const robot::OmnidirectionalRobot<int> & robot){
     sensedPosition.x = robot.position.x - position.x;
     sensedPosition.y = robot.position.y - position.y;
-    addNoiseToSensedPosition();
+    auto randomSample = sampler.getSample();
+    sensedPosition.x += randomSample.x;
+    sensedPosition.y += randomSample.y;
 }
 
-DiscreteSensor::DiscreteSensor(representations::Position<int> sensorPosition) : position(sensorPosition){
+DiscreteSensor::DiscreteSensor(representations::Position<int> sensorPosition) : position(sensorPosition), sampler(representations::DiscreteDistribution()) {
+
+}
+DiscreteSensor::DiscreteSensor(representations::Position<int> sensorPosition, representations::DiscreteDistribution distribution) : position(sensorPosition), sampler(distribution){
 
 }
 
