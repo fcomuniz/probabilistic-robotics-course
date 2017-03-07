@@ -6,10 +6,16 @@
 
 namespace world{
 
-GridWorld::GridWorld(int rows, int cols, std::vector<sensor::DiscreteSensor> sensors, itandroids_lib::math::Vector2i robotPosition): sensors(sensors), rows(rows), cols(cols), robot(robotPosition){
+GridWorld::GridWorld(int rows, int cols, std::vector<sensor::DiscreteSensor> sensors, itandroids_lib::math::Vector2i robotPosition): sensors(sensors), rows(rows), cols(cols), robot(robotPosition), sampler(representations::DiscreteDistribution()){
     checkSensorsWithinBounds();
 
 }
+
+GridWorld::GridWorld(int rows, int cols, std::vector<sensor::DiscreteSensor> sensors, itandroids_lib::math::Vector2i robotPosition, representations::DiscreteDistribution distribution): sensors(sensors), rows(rows), cols(cols), robot(robotPosition),sampler(distribution){
+    checkSensorsWithinBounds();
+
+}
+
 
 std::vector<sensor::DiscreteSensor> GridWorld::updateWorld(itandroids_lib::math::Vector2i robotCommand) {
 
@@ -20,6 +26,9 @@ std::vector<sensor::DiscreteSensor> GridWorld::updateWorld(itandroids_lib::math:
 
 void GridWorld::updateRobotPosition(itandroids_lib::math::Vector2i robotCommand) {
     auto nextValue = robot.position + robotCommand;
+    auto randomValue = sampler.getSample();
+    nextValue.x += randomValue.x;
+    nextValue.y += randomValue.y;
     if(isInBounds(nextValue)){
         robot.position = nextValue;
     } else if(nextValue.x >= 0 && nextValue.x < cols ){
@@ -52,5 +61,9 @@ void GridWorld::checkSensorsWithinBounds() {
         throw std::runtime_error("The sensors aren't within the given bounds");
     }
 
+}
+
+itandroids_lib::math::Vector2<int> GridWorld::getGroundTruth(){
+    return robot.position;
 }
 }

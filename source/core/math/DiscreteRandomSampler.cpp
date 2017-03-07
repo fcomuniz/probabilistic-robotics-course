@@ -5,8 +5,12 @@
 #include "DiscreteRandomSampler.h"
 
 
-DiscreteRandomSampler::DiscreteRandomSampler(representations::DiscreteDistribution distribution) {
+DiscreteRandomSampler::DiscreteRandomSampler(representations::DiscreteDistribution newDistribution) {
+    this->distribution=newDistribution;
     double totalSum = 0;
+    if (distribution.size()==0){
+        distribution.push_back(std::pair<representations::Position<int>,double>(representations::Position<int>(0,0),1));
+    }
     for(representations::DiscreteDistribution::iterator iter = distribution.begin(); iter!= distribution.end(); ++iter){
         totalSum += iter->second;
     }
@@ -34,7 +38,6 @@ DiscreteRandomSampler::DiscreteRandomSampler(std::vector<representations::Positi
             distribution.push_back(std::pair<representations::Position<int>,double>(positions[index],probs[index]));
         }
     }
-
 }
 
 representations::Position<int> DiscreteRandomSampler::getSample() {
@@ -45,6 +48,7 @@ representations::Position<int> DiscreteRandomSampler::getSample() {
     int index = 0;
     while (index<distribution.size() && acc<r){
         acc+=distribution[index].second;
+        index++;
     }
     return distribution[index-1].first;
 }
