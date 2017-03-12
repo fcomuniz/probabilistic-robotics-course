@@ -20,4 +20,9 @@ DiscreteWorldConfigurationData DiscreteWorldFileParser::getConfigurationData() {
     return DiscreteWorldConfigurationData();
 }
 
+void DiscreteWorldFileParser::parse(ptree &tree) {
+
+}
+
+
 }

@@ -8,23 +8,34 @@
 #include <fstream>
 #include "utils/parser/DiscreteWorldFileParser.h"
 #include "representations/DiscreteWorldData.h"
+#include "world/GridWorld.h"
+#include "estimation/DiscreteWorldEstimator.h"
 
 using utils::DiscreteWorldFileParser;
+using pt = boost::property_tree::ptree;
+using World = world::GridWorld;
 
 namespace applications{
 class DiscreteWorld_main{
 public:
     DiscreteWorld_main(){
 //        Open Discrete world file
-        std::ifstream confFile(configurationPath + "DiscreteWorldConfiguration.txt");
-        parseConfFile(confFile);
+        pt propTree(configurationPath + "DiscreteWorldConfiguration.json");
+        parseConfFile(propTree);
 
     }
     /**
      * This is the method for running the simulation and generating the world data;
      */
     void run(){
-
+        World world(configurationData.worldWidth, configurationData.worldHeight, configurationData.sensors, configurationData.robotPosition);
+        estimation::DiscreteWorldEstimator estimator;
+        for(auto & stepInTrajectory : configurationData.trajectory){
+            auto sensors = world.updateWorld(stepInTrajectory);
+            estimator.estimate(world, sensors);
+            auto estimate = estimator.getWorldEstimate();
+            worldData.push_back(DiscreteWorldData(world.getGroundTruth(), estimate.robotPosition, estimate.estimateMatrix, sensors));
+        }
     }
 
     const std::vector<DiscreteWorldData> & getWorldData(){
@@ -33,10 +44,10 @@ public:
 
 private:
     static const std::string configurationPath ;
-    void parseConfFile(std::ifstream & confFile){
+    void parseConfFile(pt & ptree){
 //        Read the configuration file
         DiscreteWorldFileParser parser;
-        parser.parse(confFile);
+        parser.parse(ptree);
         configurationData = parser.getConfigurationData();
     }
 

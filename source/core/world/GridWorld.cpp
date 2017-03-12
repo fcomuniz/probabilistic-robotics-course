@@ -66,4 +66,12 @@ void GridWorld::checkSensorsWithinBounds() {
 itandroids_lib::math::Vector2<int> GridWorld::getGroundTruth(){
     return robot.position;
 }
+
+const int GridWorld::getRows() const {
+    return rows;
+}
+
+const int GridWorld::getCols() const {
+    return cols;
+}
 }

@@ -24,6 +24,9 @@ public:
 
     std::vector<sensor::DiscreteSensor> updateWorld(itandroids_lib::math::Vector2i robotCommand);
 
+    const int getRows() const;
+
+    const int getCols() const;
 
     itandroids_lib::math::Vector2<int> getGroundTruth();
 private:

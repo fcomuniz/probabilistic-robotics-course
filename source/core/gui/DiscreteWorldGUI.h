@@ -53,6 +53,7 @@ private:
     );
     virtual void clearPlot(QCustomPlot * customPlot);
     virtual void rescaleAxis(QCustomPlot * customPlot);
+    virtual void plotSensors(QCustomPlot * customPlot, QCPColorMap * colorMap);
     int index;
     std::vector<DiscreteWorldData> data;
     Ui::DiscreteWorldGUI *ui;

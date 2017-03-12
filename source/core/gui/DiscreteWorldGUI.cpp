@@ -91,6 +91,8 @@ void DiscreteWorldGUI::plotWorldData(QCustomPlot *customPlot) {
     RobotPositionPlotData estimateRobotData(data[index].robotEstimate, Qt::red, "EstimateRobot", colorMap);
     plotRobotPosition(customPlot, estimateRobotData);
 
+    plotSensors(customPlot, colorMap);
+
 }
 
 void DiscreteWorldGUI::rescaleAxis(QCustomPlot *customPlot) {
@@ -114,5 +116,21 @@ void DiscreteWorldGUI::plotRobotPosition(QCustomPlot *customPlot, const RobotPos
 
 void DiscreteWorldGUI::clearPlot(QCustomPlot *customPlot) {
     customPlot->clearPlottables();
+}
+
+void DiscreteWorldGUI::plotSensors(QCustomPlot * customPlot,QCPColorMap * colorMap) {
+
+    customPlot->addGraph();
+    customPlot->graph()->setName("Sensors");
+    customPlot->graph()->setLineStyle(QCPGraph::lsNone);
+    customPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCrossCircle, 20));
+    customPlot->graph()->setPen(QPen(Qt::black));
+    QVector<double> x(data[index].sensors.size()), y(data[index].sensors.size());
+    int i = 0;
+    for(auto & sensor: data[index].sensors){
+        colorMap->data()->cellToCoord(sensor.position.x, sensor.position.y, &x[i], & y[i]);
+        i++;
+    }
+    customPlot->graph()->setData(x,y);
 }
 

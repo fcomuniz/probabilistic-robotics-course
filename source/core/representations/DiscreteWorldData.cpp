@@ -4,6 +4,10 @@
 
 #include "DiscreteWorldData.h"
 
-DiscreteWorldData::DiscreteWorldData(representations::Position<int> robotRealPosition, representations::Position<int> robotEstimate, Eigen::MatrixXd fmp):robotRealPosition(robotRealPosition), robotEstimate(robotEstimate), fmp(fmp) {
+DiscreteWorldData::DiscreteWorldData(representations::Position<int> robotRealPosition,
+                                     representations::Position<int> robotEstimate,
+                                     Eigen::MatrixXd fmp,
+                                     Sensors sensors):robotRealPosition(robotRealPosition),
+                                                      robotEstimate(robotEstimate), fmp(fmp), sensors(sensors) {
 
 }

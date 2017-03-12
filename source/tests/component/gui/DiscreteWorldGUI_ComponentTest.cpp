@@ -55,7 +55,7 @@ Eigen::MatrixXd generatePrettyProbabilityMatrix(representations::Position<int> e
     return returnMatrix;
 }
 
-representations::Position<int> generateRandomRobotPosition(int nRows, int nCols){
+representations::Position<int> generateRandomPosition(int nRows, int nCols){
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> disRows(0,nRows-1);
@@ -71,10 +71,15 @@ std::vector<DiscreteWorldData> generateDiscreteWorldData(){
     std::vector<DiscreteWorldData> worldData;
     int nCols = 100;
     int nRows = 200;
+    Sensors sensors;
+    for(int i = 0 ; i < 10; i ++){
+        sensors.push_back(sensor::DiscreteSensor(generateRandomPosition(nRows, nCols)));
+    }
+
     for (int i = 0 ; i < N_OF_ITERATIONS; i++){
-        auto estimateRobotPosition = generateRandomRobotPosition(nRows, nCols);
+        auto estimateRobotPosition = generateRandomPosition(nRows, nCols);
         Eigen::MatrixXd fdp = generatePrettyProbabilityMatrix(estimateRobotPosition,nRows,nCols);
-        worldData.push_back(DiscreteWorldData(generateRandomRobotPosition(nRows,nCols), estimateRobotPosition, fdp));
+        worldData.push_back(DiscreteWorldData(generateRandomPosition(nRows, nCols), estimateRobotPosition, fdp, sensors));
     }
     return worldData;
 }
