@@ -19,10 +19,12 @@ struct Estimate {
 class DiscreteWorldEstimator {
 
 public:
-    void estimate(world::GridWorld & world, Sensors sensors);
+    void estimate(world::GridWorld & world, Sensors & sensors);
     Estimate &getWorldEstimate();
 
 private:
+    void generateProbabilityMatrix(world::GridWorld & world, Sensors & sensors);
+    void generateRobotPositionEstimate();
     Estimate worldEstimate;
 };
 }

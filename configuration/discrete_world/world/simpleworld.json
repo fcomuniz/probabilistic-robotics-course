@@ -1,5 +1,6 @@
 {
   "width" : 30,
   "length" : 20,
-  "trajectory" : "simpletrajectory.json"
+  "trajectory" : "simpletrajectory.json",
+  "sensor" : "simplesensors.json"
 }

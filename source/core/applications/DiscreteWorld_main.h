@@ -10,6 +10,7 @@
 #include "representations/DiscreteWorldData.h"
 #include "world/GridWorld.h"
 #include "estimation/DiscreteWorldEstimator.h"
+#include "utils/configuration/DiscreteWorldConstants.h"
 
 using utils::DiscreteWorldFileParser;
 using pt = boost::property_tree::ptree;
@@ -42,8 +43,8 @@ public:
         return worldData;
     }
 
-private:
     static const std::string configurationPath ;
+private:
     void parseConfFile(pt & ptree){
 //        Read the configuration file
         DiscreteWorldFileParser parser;
@@ -54,7 +55,8 @@ private:
     utils::DiscreteWorldConfigurationData configurationData;
     std::vector<DiscreteWorldData> worldData;
 };
-    const std::string DiscreteWorld_main::configurationPath = std::string("../configuration/discrete_world");
+    const std::string DiscreteWorld_main::configurationPath = utils::configurationPath;
+
 }
 
 

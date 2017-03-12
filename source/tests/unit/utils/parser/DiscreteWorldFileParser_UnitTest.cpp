@@ -5,13 +5,17 @@
 #include "DiscreteWorldFileParser_UnitTest.h"
 #include <gtest/gtest.h>
 #include "utils/parser/DiscreteWorldFileParser.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 using utils::DiscreteWorldFileParser;
+namespace pt = boost::property_tree;
 
 DiscreteWorldFileParser generateUsedParser(){
     DiscreteWorldFileParser parser;
-    std::ifstream file("simple_parse_file.txt");
-    parser.parse(file);
+    pt::ptree tree;
+    pt::read_json("simpleworldtest.json", tree);
+    parser.parse(tree);
     return parser;
 }
 

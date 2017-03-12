@@ -5,14 +5,21 @@
 #include "DiscreteWorldEstimator.h"
 
 namespace estimation{
-void DiscreteWorldEstimator::estimate(world::GridWorld &world, Sensors sensors) {
-// TODO fill this code with estimation code
-
-
-// TODO Generate a world estimate
+void DiscreteWorldEstimator::estimate(world::GridWorld &world, Sensors & sensors) {
+    worldEstimate.estimateMatrix.resize(world.getRows(), world.getCols());
+    generateProbabilityMatrix(world, sensors);
+    generateRobotPositionEstimate();
 }
 
 Estimate &DiscreteWorldEstimator::getWorldEstimate(){
     return worldEstimate;
+}
+
+void DiscreteWorldEstimator::generateProbabilityMatrix(world::GridWorld &world, Sensors &sensors) {
+//Generate the probability matrix in the world Estimate
+}
+
+void DiscreteWorldEstimator::generateRobotPositionEstimate() {
+    // Generate the robot Position Estimate from the probabilty matrix;
 }
 }
