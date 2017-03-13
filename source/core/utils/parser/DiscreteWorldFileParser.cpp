@@ -26,21 +26,25 @@ void DiscreteWorldFileParser::parse(ptree &tree) {
 // Open some other ptrees
     auto filename = tree.get<std::string>("world");
 
-    ptree worldTree(utils::configurationPath + "/world/" + filename);
+    ptree worldTree;
+    boost::property_tree::read_json(utils::configurationPath + "/world/" + filename, worldTree);
     parseWorldTree(worldTree);
+    hasParsed = true;
 }
 
 void DiscreteWorldFileParser::parseWorldTree(ptree &tree) {
     auto nCols = tree.get<int>("width");
     auto nRows = tree.get<int>("height");
     auto trajectoryFilename = tree.get<std::string>("trajectory");
-    ptree trajectoryTree(utils::configurationPath + "/trajectories/" + trajectoryFilename);
+    ptree trajectoryTree;
+    boost::property_tree::read_json(utils::configurationPath + "/trajectories/" + trajectoryFilename, trajectoryTree);
     auto trajectory = generateTrajectory(trajectoryTree);
     auto robotInitialPosition = generateInitialRobotPosition(trajectoryTree);
     auto sensorsFilename = tree.get<std::string>("sensor");
-    ptree sensorTree(utils::configurationPath + "/sensors/" + sensorsFilename);
+    ptree sensorTree;
+    boost::property_tree::read_json(utils::configurationPath + "/sensors/" + sensorsFilename , sensorTree);
     auto sensors = generateSensors(sensorTree);
-    data = std::make_shared<DiscreteWorldConfigurationData>(nRows, nCols, trajectory, sensors, robotInitialPosition);
+    data = std::make_shared<DiscreteWorldConfigurationData>(nCols,nRows, trajectory, sensors, robotInitialPosition);
 }
 
 representations::DiscreteTrajectory DiscreteWorldFileParser::generateTrajectory(ptree &trajectoryTree) {
@@ -48,6 +52,7 @@ representations::DiscreteTrajectory DiscreteWorldFileParser::generateTrajectory(
 }
 
 Sensors DiscreteWorldFileParser::generateSensors(ptree &sensorsTree) {
+
     return Sensors();
 }
 

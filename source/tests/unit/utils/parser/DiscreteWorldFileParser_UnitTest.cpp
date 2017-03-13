@@ -39,7 +39,8 @@ TEST(DiscreteWorldFileParser_UnitTest, check_for_throw_test){
 }
 
 void checkSimpleConfigurationData(utils::DiscreteWorldConfigurationData configurationData){
-
+    EXPECT_EQ(configurationData.worldHeight, 20);
+    EXPECT_EQ(configurationData.worldWidth, 30);
 }
 
 

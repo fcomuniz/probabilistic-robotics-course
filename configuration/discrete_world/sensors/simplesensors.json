@@ -2,10 +2,21 @@
   "sensors" : [
     {
       "position" : {
-
+        "x" : 0,
+        "y" : 1
       },
-      "distribution" : {
-
+      "distribution" : [
+        {
+          "x": 0,
+          "y": 0,
+          "p": 1
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "p": 1
+        }
+        ]
       }
     }
   ]
