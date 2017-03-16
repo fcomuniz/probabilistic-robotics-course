@@ -16,6 +16,9 @@ wget https://cmake.org/files/v3.5/cmake-3.5.2.tar.gz
 tar -xvf cmake-3.5.2.tar.gz
 cd cmake-3.5.2
 ./configure
+sudo mkdir build
+cd build
+cmake ..
 make -j 4
 sudo make install
 sudo ldconfig
@@ -30,15 +33,13 @@ wget http://bitbucket.org/eigen/eigen/get/3.2.8.tar.gz
 tar -xvf 3.2.8.tar.gz
 cd eigen-eigen-07105f7125
 mkdir -p build
-cd build
-cmake ..
 make -j 4
 sudo make install
 popd
 
 }
 
-function install_cpp_14{
+function install_cpp_14(){
 sudo apt-get update
 sudo apt-get install build-essential
 sudo apt-get install libboost-all-dev
@@ -53,7 +54,7 @@ sudo ln -s cpp-5 cpp
 
 }
 
-function install_qt5{
+function install_qt5(){
 # https://wiki.qt.io/Install_Qt_5_on_Ubuntu
 pushd $HOME
 wget http://download.qt.io/official_releases/qt/5.7/5.7.0/qt-opensource-linux-x64-5.7.0.run
