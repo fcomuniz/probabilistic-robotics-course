@@ -52,7 +52,7 @@ classdef Simulation < handle
                 end
                     
                 obj.z{index} = obj.generateObservation(obj.x{index+1});
-                [obj.xHat{index+1},obj.Pk{index+1}] = obj.filter.updateStep(obj.z{index});
+                [obj.xHat{index+1},obj.Pk{index+1}] = obj.filter.filteringStep(obj.z{index});
                 if obj.dynamicPlot
                     figure(1)
                     clf()
